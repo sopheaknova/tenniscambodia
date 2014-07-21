@@ -743,6 +743,71 @@ if ( ! function_exists( 'sp_sliders' ) ) {
 }
 
 /* ---------------------------------------------------------------------- */
+/*	Player Member
+/* ---------------------------------------------------------------------- */
+
+/* Get player member */ 
+if ( ! function_exists( 'sp_get_player_member' ) ) {
+	function sp_get_player_member( $category_id = '', $numberposts = '10' ){
+		global $post;
+
+		$out = '';
+
+		$args = array(
+			'post_type' => 'player',
+			'post_status' => 'publish',
+			'posts_per_page' => $numberposts
+			);
+		$custom_query = new WP_Query( $args );
+
+		while ( $custom_query->have_posts() ) : $custom_query->the_post();
+
+			$out .= '<figure class="sp-player ' . $post->ID . '">';
+			$out .= sp_single_player_meta( 'large' );
+			$out .= '</figure>';
+		
+		endwhile;
+		wp_reset_postdata();
+
+		return $out;	
+	}
+}
+
+/* Single player */ 
+if ( ! function_exists( 'sp_single_player_meta' ) ) {
+	function sp_single_player_meta( $size = 'thumbnail', $style = 'default' ){
+		global $post;
+
+		$out = '';
+		$out .= '<div class="sp-player ' . $style . '">';
+		if ( is_singular('player') ) {
+			$out .= '<a href="'.sp_post_thumbnail( 'large' ).'"><img class="attachment-medium wp-post-image" src="' . sp_post_thumbnail( $size ) . '" /></a>';
+		} else { 
+			$out .= '<a href="'.get_permalink().'"><img class="attachment-medium wp-post-image" src="' . sp_post_thumbnail( $size ) . '" /></a>';
+			$out .= '<h3><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
+		}
+	    $out .= '</div>';
+
+		return $out;	
+	}
+}
+
+/* Related player */ 
+if ( ! function_exists( 'sp_related_player_meta' ) ) {
+	function sp_related_player_meta( $size = 'thumbnail', $style = 'default' ){
+		global $post;
+
+		$out = '';
+		$out .= '<div class="sp-player ' . $style . '">';
+		$out .= '<a href="'.get_permalink().'"><img class="attachment-medium wp-post-image" src="' . sp_post_thumbnail( $size ) . '" /></a>';
+		$out .= '<h3><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
+	    $out .= '</div>';
+
+		return $out;	
+	}
+}
+
+/* ---------------------------------------------------------------------- */
 /*	Get logos by type 
 /* ---------------------------------------------------------------------- */
 if ( ! function_exists( 'sp_get_logos_by_type' ) ) {

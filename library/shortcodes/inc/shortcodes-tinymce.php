@@ -14,6 +14,7 @@ function sp_shortcodes_register_mce_button( $buttons ) {
 	array_push( $buttons, 'toggle' );
 	array_push( $buttons, 'tab' );
 	array_push( $buttons, 'gallery' );
+	array_push( $buttons, 'player' );
 
     return $buttons;
 }
@@ -28,6 +29,7 @@ function sp_shortcodes_add_tinymce_plugin($plugin_array) {
 	$plugin_array['toggle']			= ED_JS_URL . 'ed-toggle.js';
 	$plugin_array['tab']			= ED_JS_URL . 'ed-tab.js';
 	$plugin_array['gallery']		= ED_JS_URL . 'ed-gallery.js';
+	$plugin_array['player']			= ED_JS_URL . 'ed-player.js';
 	
     return $plugin_array;
  }
@@ -44,5 +46,6 @@ add_action( 'admin_head', 'sp_shortcodes_add_mce_button' );
 
 load_template( SC_INC_DIR . 'popup/ajax-slider-shortcode.php' );
 load_template( SC_INC_DIR . 'popup/ajax-gallery-shortcode.php' );
+load_template( SC_INC_DIR . 'popup/ajax-player-shortcode.php' );
 
 ?>

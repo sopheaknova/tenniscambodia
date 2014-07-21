@@ -32,6 +32,7 @@ if ( ! isset( $cp_menu_position ) )
 			'menu_slider'	=> 30,
 			'menu_gallery'	=> 33,
 			'menu_logo'		=> 39,
+			'menu_player'	=> 42,
 		);
 
 
