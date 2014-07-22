@@ -143,6 +143,38 @@ $post_type_gallery = array(
 );
 
 /* ---------------------------------------------------------------------- */
+/*	Event post type
+/* ---------------------------------------------------------------------- */
+$post_type_event = array(
+	'id'          => 'event-setting',
+	'title'       => 'Event meta',
+	'desc'        => 'These settings enable you to setup meta data of event.',
+	'pages'       => array( 'event' ),
+	'context'     => 'normal',
+	'priority'    => 'high',
+	'fields'      => array(
+		array(
+			'label'		=> 'Start date',
+			'id'		=> $prefix . 'event_start_date',
+			'type'		=> 'date-time-picker',
+			'desc'		=> 'Select start date for event'
+		),
+		array(
+			'label'		=> 'End date',
+			'id'		=> $prefix . 'event_end_date',
+			'type'		=> 'date-time-picker',
+			'desc'		=> 'Select end date for event'
+		),
+		array(
+			'label'		=> 'Location',
+			'id'		=> $prefix . 'event_location',
+			'type'		=> 'text',
+			'desc'		=> 'Enter location for event'
+		)
+	)
+);
+
+/* ---------------------------------------------------------------------- */
 /*	Logo post type
 /* ---------------------------------------------------------------------- */
 $post_type_logo = array(
@@ -487,6 +519,7 @@ function rw_maybe_include() {
 	ot_register_meta_box( $post_type_gallery );
 	ot_register_meta_box( $post_type_slider );
 	ot_register_meta_box( $post_type_logo );
+	ot_register_meta_box( $post_type_event );
 
 	$template_file = rw_maybe_include();
 	if ( $template_file == 'template-home.php' ) {

@@ -33,6 +33,7 @@ if ( ! isset( $cp_menu_position ) )
 			'menu_gallery'	=> 33,
 			'menu_logo'		=> 39,
 			'menu_player'	=> 42,
+			'menu_event'	=> 45,
 		);
 
 

@@ -846,6 +846,61 @@ if ( ! function_exists( 'sp_get_logos_by_type' ) ) {
 }
 
 /* ---------------------------------------------------------------------- */
+/*	Event
+/* ---------------------------------------------------------------------- */
+if ( ! function_exists( 'sp_upcoming_event' ) ) {
+	function sp_upcoming_event() {
+
+		$out ='';
+		$args = array(
+		    'post_type'             =>   'event',
+		    'posts_per_page'        =>   10,
+		    'post_status'           =>   'publish',
+		    'ignore_sticky_posts'   =>   true,
+		    'meta_key'              =>   'sp_event_start_date',
+		    'orderby'               =>   'meta_value_num',
+		    'order'                 =>   'ASC',
+		    'meta_query'			=> 	 array(
+											    'relation'  =>   'AND',
+											    array(
+											        'key'       =>   'sp_event_date_time',
+											        'value'     =>   date('Y-m-d h:i', time()+(3600*7)),
+											        'compare'   =>   '>=',
+											        'type'		=> 'DATETIME'
+											    )
+											)	
+		);
+
+		$custom_query = new WP_Query( $args );
+
+		while( $custom_query->have_posts() ): $custom_query->the_post();
+		
+			$out .= '<h4>' . get_the_title() . '</h4>';
+
+		endwhile; wp_reset_postdata();
+
+		return $out;
+
+	}
+}	
+
+if ( ! function_exists( 'sp_get_single_event_meta' ) ) {
+	function sp_get_single_event_meta() {
+
+		$event_start_date = explode( ' ', get_post_meta( get_the_ID(), 'sp_event_start_date', true ) );
+		$event_end_date = explode( ' ', get_post_meta( get_the_ID(), 'sp_event_end_date', true ) );
+		$out = '<div class="event-meta">';
+		$out .= '<span class="location">At ' . get_post_meta( get_the_ID(), 'sp_event_location', true ) . '</span>';
+		$out .= ', <span class="time">' . $event_start_date[1] . ' to ' . $event_end_date[1] . '</span>';
+		$out .= '<span class="date"><small>From</small> ' . date("l, F j, Y", strtotime($event_start_date[0])) . ' to ' . date("l, F j, Y", strtotime($event_end_date[0])) .'</span>';
+		$out .= '</div>';
+
+		return $out;
+
+	}
+}	
+
+/* ---------------------------------------------------------------------- */
 /*	Social icons - Widget
 /* ---------------------------------------------------------------------- */
 if ( ! function_exists( 'sp_show_social_icons' ) ) {
