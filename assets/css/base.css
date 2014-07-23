@@ -47,7 +47,7 @@ h6 {
 
 /* Link */
 a, a > * {
-	color: #6B6B6B; /* #4d90fe; */
+	color: #052a50; /* #4d90fe; */
 	text-decoration: none;
 	-webkit-transition: background-color .2s ease, border .2s ease, color .2s ease, opacity .2s ease-in-out;
 	   -moz-transition: background-color .2s ease, border .2s ease, color .2s ease, opacity .2s ease-in-out;

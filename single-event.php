@@ -27,14 +27,13 @@ get_header(); ?>
 						<li class="previous"><?php previous_post_link('%link', '<i class="icon-left-open-1"></i><strong>'.__('Previous event', SP_TEXT_DOMAIN).'</strong> <span>%title</span>'); ?></li>
 						<li class="next"><?php next_post_link('%link', '<i class="icon-right-open-1"></i><strong>'.__('Next event', SP_TEXT_DOMAIN).'</strong> <span>%title</span>'); ?></li>
 					</ul> -->
-					<?php echo sp_upcoming_event(); ?>
 
 					<?php if ( ot_get_option('social_share') != 'off' ) { get_template_part('library/contents/social-share'); } ?>
 					
 
 				</article><!-- #post -->
 
-				<?php //if ( ot_get_option( 'related-posts' ) != '1' ) { get_template_part('library/contents/related-event'); } ?>
+				<?php if ( ot_get_option( 'related-posts' ) != '1' ) { get_template_part('library/contents/related-event'); } ?>
 
 
 		<?php		

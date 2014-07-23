@@ -2,7 +2,7 @@
 
 <?php if ( $related->have_posts() ): ?>
 <section class="related-posts">
-<h4 class="heading"><?php _e('You may also like...','hueman'); ?></h4>
+<h4 class="heading"><?php _e('You may also like...', SP_TEXT_DOMAIN); ?></h4>
 
 <ul class="clearfix">
 	

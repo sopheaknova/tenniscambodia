@@ -80,59 +80,26 @@ get_header(); ?>
 
     <?php endif; ?> 
 
+    
     <div class="two-fourth">
-        <div class="widget">
-            <div class="widget-title"><h4><?php echo $home_meta['sp_video_title'][0]; ?></h4></div>
-            <?php echo sp_add_video ($home_meta['sp_video_url_home'][0], 300, 169); ?>
-        </div>
-    </div> <!-- video -->
-
-    <div class="two-fourth last">
-        <div class="widget sp-widget-upcoming-events clearfix">
-            <div class="widget-title"><h4><?php echo $home_meta['sp_event_title'][0]; ?></h4></div>
-            <article>
-                <div class="event-meta">
-                    <span class="event-day">22</span>
-                    <span class="event-month">Jul</span>
-                </div>
-                <a href="#" class="event-title">
-                    <h5>The Best Adults Social Doubles Competition</h5>
-                    <span class="event-location">At Cambodian Country Club</span>
-                    <span class="event-time">09:00 am</span>
-                </a>
-            </article>
-            <article>
-                <div class="event-meta">
-                    <span class="event-day">06</span>
-                    <span class="event-month">Jun</span>
-                </div>
-                <a href="#" class="event-title">
-                    <h5>Tennis 10’s Festival</h5>
-                    <span class="event-location">At Cambodian Country Club</span>
-                    <span class="event-time">14:30 pm</span>
-                </a>
-            </article>
-            <a class="learn-more" href="ing-holdings.com">All events</a>
-        </div>
-    </div> <!-- upcoming-event -->  
-
-    <div class="two-fourth">
+    <div class="widget">
+        <div class="widget-title"><h4><?php echo $home_meta['sp_video_title'][0]; ?></h4></div>
+        <?php echo sp_add_video ($home_meta['sp_video_url_home'][0], 300, 169); ?>
+    </div><!-- video -->
     <div class="widget sp-widget-logos">
         <div class="widget-title"><h4><?php echo $home_meta['sp_partner_title'][0]; ?></h4></div>
         <section id="partners">
         <?php echo sp_get_logos_by_type( $home_meta['sp_partner_home'][0], $home_meta['sp_partner_logo_num'][0] ); ?>    
         </section>
-    </div>
-    </div> <!-- partner -->
+    </div><!-- partner -->
+    </div> 
 
     <div class="two-fourth last">
-    <div class="widget sp-widget-logos">
-        <div class="widget-title"><h4><?php echo $home_meta['sp_award_title'][0]; ?></h4></div>
-        <section id="awards">
-            <?php echo sp_get_logos_by_type( $home_meta['sp_award_home'][0], $home_meta['sp_award_logo_num'][0] ); ?>
-        </section>
-    </div>
-    </div> <!-- awards -->
+    <div class="widget sp-widget-upcoming-events clearfix">
+        <div class="widget-title"><h4><?php echo $home_meta['sp_event_title'][0]; ?></h4></div>
+        <?php echo sp_upcoming_event( 2 ); ?>
+    </div><!-- upcoming-event -->   
+    </div> <!-- .two-fourth .last -->
 
 
 

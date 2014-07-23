@@ -164,6 +164,24 @@ if ( !function_exists('sp_get_posts_related_by_taxonomy') ) {
 
 }
 
+if ( !function_exists('sp_get_posttype_related') ) {
+
+	function sp_get_posttype_related($post_id, $args=array()) {
+
+		//$query = new WP_Query();
+		$args = wp_parse_args($args,array(
+		  'post__not_in' => array($post_id),
+		  'orderby' => 'rand',
+		  'posts_per_page' => -1,
+		  'post_status'    =>   'publish',
+		));
+		$query = new WP_Query($args);
+
+		return $query;
+	}
+
+}
+
 /* ---------------------------------------------------------------------- */               							
 /*  Taxonomy has children and has parent
 /* ---------------------------------------------------------------------- */
@@ -849,21 +867,23 @@ if ( ! function_exists( 'sp_get_logos_by_type' ) ) {
 /*	Event
 /* ---------------------------------------------------------------------- */
 if ( ! function_exists( 'sp_upcoming_event' ) ) {
-	function sp_upcoming_event() {
+	function sp_upcoming_event( $postnum = 10, $excerpt = true ) {
+
+		global $wp_post_types;
 
 		$out ='';
 		$args = array(
 		    'post_type'             =>   'event',
-		    'posts_per_page'        =>   10,
+		    'posts_per_page'        =>   $postnum,
 		    'post_status'           =>   'publish',
 		    'ignore_sticky_posts'   =>   true,
-		    'meta_key'              =>   'sp_event_start_date',
-		    'orderby'               =>   'meta_value_num',
-		    'order'                 =>   'ASC',
+		    // 'meta_key'              =>   'sp_event_start_date',
+		    // 'orderby'               =>   'meta_value_num',
+		    // 'order'                 =>   'ASC',
 		    'meta_query'			=> 	 array(
 											    'relation'  =>   'AND',
 											    array(
-											        'key'       =>   'sp_event_date_time',
+											        'key'       =>   'sp_event_end_date',
 											        'value'     =>   date('Y-m-d h:i', time()+(3600*7)),
 											        'compare'   =>   '>=',
 											        'type'		=> 'DATETIME'
@@ -874,15 +894,42 @@ if ( ! function_exists( 'sp_upcoming_event' ) ) {
 		$custom_query = new WP_Query( $args );
 
 		while( $custom_query->have_posts() ): $custom_query->the_post();
-		
-			$out .= '<h4>' . get_the_title() . '</h4>';
-
+			$out .= sp_event_highlight($excerpt); 
 		endwhile; wp_reset_postdata();
+		$out .= '<a class="learn-more" href="' . get_post_type_archive_link( 'event' ) . '">' . __( 'All events', SP_TEXT_DOMAIN ) . '</a>';
 
 		return $out;
 
 	}
-}	
+}
+
+if ( ! function_exists( 'sp_event_highlight' ) ) {
+	function sp_event_highlight( $excerpt = true ) {
+
+		$event_start_date = explode( ' ', get_post_meta( get_the_ID(), 'sp_event_start_date', true ) );
+		$event_end_date = explode( ' ', get_post_meta( get_the_ID(), 'sp_event_end_date', true ) );
+
+		$out ='';
+		$out .= '<article>';
+        $out .= '<div class="event-meta">';
+        $out .= '<span class="event-day">' . date('d', strtotime($event_start_date[0])) . '</span>';
+        $out .= '<span class="event-month">' . date('M', strtotime($event_start_date[0])) . '</span>';
+        $out .= '</div>';
+        $out .= '<a href="' . get_permalink() . '" class="event-title">';
+        $out .= '<h5>' . get_the_title() . '</h5>';
+        $out .= '<span class="event-location">At ' . get_post_meta( get_the_ID(), 'sp_event_location', true ) . '</span>';
+        $out .= '<span class="event-time">' . date('h:i A', strtotime($event_start_date[1])) . ' to ' . date('h:i A', strtotime($event_end_date[1])) . '</span>';
+        $out .= '</a>';
+        if ($excerpt) :
+        	$out .= '<p>' . get_the_excerpt() . '</p>';
+        	$out .= '<a class="learn-more" href="' . get_permalink() . '">' . __( 'Detail', SP_TEXT_DOMAIN ) . '</a>';
+        endif; 	
+    	$out .= '</article>';
+
+		return $out;
+
+	}
+}		
 
 if ( ! function_exists( 'sp_get_single_event_meta' ) ) {
 	function sp_get_single_event_meta() {
@@ -890,9 +937,9 @@ if ( ! function_exists( 'sp_get_single_event_meta' ) ) {
 		$event_start_date = explode( ' ', get_post_meta( get_the_ID(), 'sp_event_start_date', true ) );
 		$event_end_date = explode( ' ', get_post_meta( get_the_ID(), 'sp_event_end_date', true ) );
 		$out = '<div class="event-meta">';
-		$out .= '<span class="location">At ' . get_post_meta( get_the_ID(), 'sp_event_location', true ) . '</span>';
-		$out .= ', <span class="time">' . $event_start_date[1] . ' to ' . $event_end_date[1] . '</span>';
-		$out .= '<span class="date"><small>From</small> ' . date("l, F j, Y", strtotime($event_start_date[0])) . ' to ' . date("l, F j, Y", strtotime($event_end_date[0])) .'</span>';
+		$out .= '<span class="event-location">At ' . get_post_meta( get_the_ID(), 'sp_event_location', true ) . '</span>';
+		$out .= '<span class="event-time">, ' . date('h:i A', strtotime($event_start_date[1])) . ' to ' . date('h:i A', strtotime($event_end_date[1])) . '</span>';
+		$out .= '<span class="event-date"><small>From</small> ' . date("l, F j, Y", strtotime($event_start_date[0])) . ' to ' . date("l, F j, Y", strtotime($event_end_date[0])) .'</span>';
 		$out .= '</div>';
 
 		return $out;
