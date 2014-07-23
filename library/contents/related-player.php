@@ -12,7 +12,7 @@
 		<article <?php post_class(); ?>>
 
 			<?php
-				echo sp_related_player_meta('large');
+				echo sp_related_player_meta('thumb-medium');
 			?>
 
 		</article>

@@ -14,7 +14,7 @@
 
 <?php if ( $related->have_posts() ): $count = 1; ?>
 <section class="related-posts">
-<h4 class="heading"><?php _e('Other event...', SP_TEXT_DOMAIN); ?></h4>
+	<h4 class="heading"><?php _e('Other event...', SP_TEXT_DOMAIN); ?></h4>
 	<div class="sp-widget-upcoming-events clearfix">
 	<?php while ( $related->have_posts() ) : $related->the_post(); ?>
 	<div class="two-fourth<?php echo ($count == 2) ? ' last' : '';?>">

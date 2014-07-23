@@ -777,16 +777,14 @@ if ( ! function_exists( 'sp_get_player_member' ) ) {
 			'posts_per_page' => $numberposts
 			);
 		$custom_query = new WP_Query( $args );
-
-		while ( $custom_query->have_posts() ) : $custom_query->the_post();
-
-			$out .= '<figure class="sp-player ' . $post->ID . '">';
-			$out .= sp_single_player_meta( 'large' );
-			$out .= '</figure>';
-		
-		endwhile;
-		wp_reset_postdata();
-
+		if( $custom_query->have_posts() ) :
+			$out .= '<div class="sp-player">';
+			while ( $custom_query->have_posts() ) : $custom_query->the_post();
+				$out .= '<div class="one-third ' . $post->ID . '">' . sp_single_player_meta( 'thumb-medium' ) . '</div>';
+			endwhile;
+			wp_reset_postdata();
+			$out .= '</div>';
+		endif;
 		return $out;	
 	}
 }
@@ -797,14 +795,13 @@ if ( ! function_exists( 'sp_single_player_meta' ) ) {
 		global $post;
 
 		$out = '';
-		$out .= '<div class="sp-player ' . $style . '">';
+		
 		if ( is_singular('player') ) {
 			$out .= '<a href="'.sp_post_thumbnail( 'large' ).'"><img class="attachment-medium wp-post-image" src="' . sp_post_thumbnail( $size ) . '" /></a>';
 		} else { 
 			$out .= '<a href="'.get_permalink().'"><img class="attachment-medium wp-post-image" src="' . sp_post_thumbnail( $size ) . '" /></a>';
 			$out .= '<h3><a href="' . get_permalink() . '">' . get_the_title() . '</a></h3>';
 		}
-	    $out .= '</div>';
 
 		return $out;	
 	}
