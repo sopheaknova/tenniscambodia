@@ -487,18 +487,18 @@ $page_template_home = array(
 			'std'		=> 'Photogallery'
 		),
 		array(
-			'label'		=> 'Select Album',
-			'id'		=> $prefix . 'gallery_home',
-			'type'		=> 'custom-post-type-select',
-			'desc'		=> 'Select album to show',
-			'post_type' => 'gallery',
+			'label'		=> 'Number of album',
+			'id'		=> $prefix . 'album_num',
+			'type'		=> 'text',
+			'std'		=> 4,
+			'desc'		=> 'Enter number only.',
 		),
 		array(
-			'label'		=> 'Number of photos',
-			'id'		=> $prefix . 'photo_num',
+			'label'		=> 'Album column',
+			'id'		=> $prefix . 'album_col',
 			'type'		=> 'text',
-			'std'		=> 10,
-			'desc'		=> 'Enter number only.',
+			'std'		=> 4,
+			'desc'		=> 'Enter column number of album.',
 		),
 
 	)

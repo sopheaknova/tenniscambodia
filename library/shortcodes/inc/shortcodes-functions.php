@@ -253,6 +253,7 @@ function sp_gallery_sc( $atts, $content = null ){
 
 	extract( shortcode_atts( array(
 		'gallery_id' => null,
+		'cols' => null,
 		'gallery_num' => null,
 	), $atts ) );
 
@@ -260,11 +261,11 @@ function sp_gallery_sc( $atts, $content = null ){
 
 	if ( $gallery_id == '-1' ) { // Show each cover album
 		
-		$out .= sp_get_cover_album( $gallery_num, 'post-slider' );
+		$out .= sp_get_cover_album( $gallery_num, $cols, 'post-slider' );
 
 	} else { // show individual album
 
-		$out .= sp_get_album_gallery( $gallery_id, $gallery_num, 'thumb-medium' );
+		$out .= sp_get_album_gallery( $gallery_id, $gallery_num, $cols );
 
 	}
 

@@ -631,23 +631,48 @@ if ( ! function_exists( 'sp_last_posts_cat' ) ) {
 }
 
 /* ---------------------------------------------------------------------- */
+/*	Columns switcher
+/* ---------------------------------------------------------------------- */
+if ( ! function_exists( 'sp_colums_switcher' ) ) {
+	function sp_colums_switcher( $cols = 2 ) {
+		switch ( $cols ) {
+			case "2":
+				$cols = 'two-fourth';
+			break;
+
+			case "3":
+				$cols = 'one-third';
+			break;
+			
+			case "4":
+				$cols = 'one-fourth';
+			break;
+
+			default:
+				break;
+		}
+		return $cols;
+	}
+}		
+
+/* ---------------------------------------------------------------------- */
 /*	Get latest gallery/album
 /* ---------------------------------------------------------------------- */
 if ( ! function_exists( 'sp_get_album_gallery' ) ) {
-	function sp_get_album_gallery( $album_id = '', $photo_num = 10, $size = 'thumbnail' ) {
+	function sp_get_album_gallery( $album_id = '', $photo_num = 10, $cols = 4, $size = 'post-slider' ) {
 
 		global $post;
 
 		$gallery = explode( ',', get_post_meta( $album_id, 'sp_gallery', true ) );
 
 		$count = 0;
-		$out = '<div class="gallery clearfix">';
+		$out = '<div class="gallery clearfix photogallery">';
 		
 		if ( $gallery[0] != '' ) :
 			foreach ( $gallery as $image ) :
 				$imageid = wp_get_attachment_image_src($image, $size);
 				if ( is_singular('gallery') ) {
-					$out .= '<div class="one-third">';
+					$out .= '<div class="' . sp_colums_switcher($cols) . '">';
 					$out .= '<a href="' . wp_get_attachment_url($image) . '">';
 					$out .= '<img class="attachment-medium wp-post-image" src="' . $imageid[0] . '">';
 					$out .= '</a>';
@@ -675,7 +700,7 @@ if ( ! function_exists( 'sp_get_album_gallery' ) ) {
 /*	Get Cover of Album
 /* ---------------------------------------------------------------------- */
 if ( ! function_exists( 'sp_get_cover_album' ) ) {
-	function sp_get_cover_album( $photo_num = 10, $size = 'thumbnail' ) {
+	function sp_get_cover_album( $photo_num = 10, $cols = 3, $size = 'thumbnail' ) {
 
 		global $post;
 
@@ -687,11 +712,11 @@ if ( ! function_exists( 'sp_get_cover_album' ) ) {
 		$custom_query = new WP_Query( $args );
 
 		if( $custom_query->have_posts() ) :
-			$out = '<div class="album-cover clearfix">';
+			$out = '<div class="album-cover clearfix photogallery">';
 			while ( $custom_query->have_posts() ) : $custom_query->the_post();
-				$out .= '<div class="two-fourth">';
+				$out .= '<div class="' . sp_colums_switcher($cols) . '">';
 				$out .= sp_related_album('post-slider');
-                $out .= '</div><!-- .two-fourth -->';
+                $out .= '</div><!-- .cols -->';
 
 			endwhile; wp_reset_postdata();
 			$out .= '</div><!-- .album-cover -->';
@@ -702,7 +727,7 @@ if ( ! function_exists( 'sp_get_cover_album' ) ) {
 }
 
 /* ---------------------------------------------------------------------- */
-/*	Get Cover of Album
+/*	Get Related Album
 /* ---------------------------------------------------------------------- */
 if ( ! function_exists( 'sp_related_album' ) ) {
 	function sp_related_album( $size = 'thumbnail' ) {

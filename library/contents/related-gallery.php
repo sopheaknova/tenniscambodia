@@ -4,7 +4,7 @@
 <section class="related-posts">
 <h4 class="heading"><?php _e('Related ablum...', SP_TEXT_DOMAIN); ?></h4>
 
-<ul class="album-cover clearfix">
+<ul class="photogallery clearfix">
 	
 	<?php while ( $related->have_posts() ) : $related->the_post(); ?>
 	<li class="related post-hover">

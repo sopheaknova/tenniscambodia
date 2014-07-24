@@ -112,7 +112,7 @@ get_header(); ?>
     <div class="clear"></div>
     <div class="widget sp-widget-photogallery">
         <div class="widget-title"><h4><?php echo $home_meta['sp_photo_title'][0]; ?></h4></div>
-        <?php echo sp_get_album_gallery( $home_meta['sp_gallery_home'][0], $home_meta['sp_photo_num'][0])?>
+        <?php echo sp_get_cover_album( $home_meta['sp_album_num'][0], $home_meta['sp_album_col'][0], 'post-slider' ); ?>
     </div>
 
 <?php do_action( 'sp_end_content_wrap_html' ); ?>

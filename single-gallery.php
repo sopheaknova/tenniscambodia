@@ -21,7 +21,11 @@ get_header(); ?>
 					</header>
 
 					<div class="entry-content">
-						<?php echo sp_get_album_gallery( $post->ID, '', 'thumb-medium' ); ?>
+						<?php
+							$postnum = -1;
+							$cols = 4; 
+							echo sp_get_album_gallery( $post->ID, $postnum, $cols ); 
+						?>
 
 						<?php if ( ot_get_option('social_share') != 'off' ) { get_template_part('library/contents/social-share'); } ?>
 					</div><!-- .entry-content -->

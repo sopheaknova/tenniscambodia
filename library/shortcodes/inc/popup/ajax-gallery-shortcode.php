@@ -31,6 +31,13 @@ function sp_gallery_shortcode_ajax(){
 					</td>
 				</tr>
 				<tr>
+					<?php $field = 'cols'; ?>
+					<th><label for="<?php echo $field; ?>"><?php _e( 'Column of album: ', 'sptheme_admin' ); ?></label></th>
+					<td>
+						<input type="text" name="<?php echo $field; ?>" id="<?php echo $field; ?>" value="2" /> <smal>(Number of column to show album)</small>
+					</td>
+				</tr>
+				<tr>
 					<?php $field = 'gallery_num'; ?>
 					<th><label for="<?php echo $field; ?>"><?php _e( 'Number of photo: ', 'sptheme_admin' ); ?></label></th>
 					<td>

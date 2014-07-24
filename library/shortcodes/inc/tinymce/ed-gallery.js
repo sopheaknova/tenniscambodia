@@ -35,6 +35,7 @@
 		// but well, this gets the job done nonetheless
 		var options = { 
 			'gallery_id' : null,
+			'cols' : null,
 			'gallery_num' : null
 			};
 		var shortcode = '[sc_gallery';
