@@ -114,8 +114,8 @@
 	overflow: hidden;
 }
 .logo-slideshow .flex-direction-nav a {
-	width:20px;
-	height: 20px;
+	width:18px;
+	height: 18px;
 }
 .logo-slideshow .flex-direction-nav li a:before{
 	font-family:'fontello'; 
