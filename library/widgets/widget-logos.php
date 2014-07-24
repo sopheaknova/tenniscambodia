@@ -40,6 +40,7 @@ class sp_widget_logos extends WP_Widget {
 		$title = apply_filters('widget_title', $instance['title']);
 		$logo_type = $instance['logo_type'];
 		$logo_num = $instance['logo_num'];
+		$is_slideshow = $instance['is_slideshow'];
 		
 		/* Before widget (defined by themes). */
 		$out = $before_widget;
@@ -48,7 +49,7 @@ class sp_widget_logos extends WP_Widget {
 		if ( $title )
 			$out .= $before_title . $title . $after_title;
 
-		$out .= sp_get_logos_by_type( $logo_type, $logo_num );
+		$out .= sp_get_logos_by_type( $logo_type, $logo_num, $is_slideshow );
 	
 		/* After widget (defined by themes). */		
 		$out .= $after_widget;
@@ -66,6 +67,7 @@ class sp_widget_logos extends WP_Widget {
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['logo_type'] = strip_tags( $new_instance['logo_type'] );
 		$instance['logo_num'] = strip_tags( $new_instance['logo_num'] );
+		$instance['is_slideshow'] = strip_tags( $new_instance['is_slideshow'] );
 
 		return $instance;
 	}
@@ -81,7 +83,8 @@ class sp_widget_logos extends WP_Widget {
 		$defaults = array( 
 			'title' => 'Title', 
 			'logo_type' => 'Select logo type',
-			'logo_num' => '10');
+			'logo_num' => '10',
+			'is_slideshow' => true);
 		$instance = wp_parse_args( (array) $instance, $defaults); 
 
 		$args = array(
@@ -108,6 +111,11 @@ class sp_widget_logos extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'logo_num' ); ?>">Number of logos: </label>
 			<input id="<?php echo $this->get_field_id( 'logo_num' ); ?>" name="<?php echo $this->get_field_name( 'logo_num' ); ?>" value="<?php echo $instance['logo_num']; ?>" type="text" size="3" />
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'is_slideshow' ); ?>">Slideshow: </label>
+			<input id="<?php echo $this->get_field_id( 'is_slideshow' ); ?>" name="<?php echo $this->get_field_name( 'is_slideshow' ); ?>" value="<?php echo ( $instance['is_slideshow'] ) ? 'true' : 'false'; ?>" <?php if( $instance['is_slideshow'] ) echo 'checked="checked"'; ?> type="checkbox" />
 		</p>
         
 	   <?php 

@@ -639,12 +639,6 @@ if ( ! function_exists( 'sp_get_album_gallery' ) ) {
 		global $post;
 
 		$gallery = explode( ',', get_post_meta( $album_id, 'sp_gallery', true ) );
-		/*$args = array(
-			'posts_per_page'	=>	$photo_num,
-			'post_parent'		=>	$album_id
-		);
-
-		$gallery = sp_post_images( $args );*/
 
 		$count = 0;
 		$out = '<div class="gallery clearfix">';
@@ -670,15 +664,6 @@ if ( ! function_exists( 'sp_get_album_gallery' ) ) {
 		else : 
 			$out .= __( 'Sorry there is no image for this album.', SP_TEXT_DOMAIN );
 		endif;
-		
-		/*foreach ( $gallery as $image ) : setup_postdata( $image );
-			$imageid = wp_get_attachment_image_src($image->ID, $size);
-			$out .= '<div class="one-third">';
-			$out .= '<a href="' . wp_get_attachment_url($image->ID) . '">';
-			$out .= '<img class="attachment-medium wp-post-image" src="' . $imageid[0] . '" alt="' . $image->post_title . '">';
-			$out .= '</a>';
-			$out .= '</div><!-- .one-third -->';
-		endforeach; wp_reset_postdata();*/
 
 		$out .= '</div>';
 
@@ -705,14 +690,7 @@ if ( ! function_exists( 'sp_get_cover_album' ) ) {
 			$out = '<div class="album-cover clearfix">';
 			while ( $custom_query->have_posts() ) : $custom_query->the_post();
 				$out .= '<div class="two-fourth">';
-				$out .= '<a href="' . get_permalink() . '">';
-				if ( has_post_thumbnail() ):
-                    $out .= get_the_post_thumbnail( $post->ID, $size);
-                elseif ( ot_get_option('placeholder') != 'off' ):
-                    $out .=  '<img class="wp-image-placeholder" src="' . SP_ASSETS_THEME . 'images/placeholder/thumb-medium.png" alt="' . the_title() . '" />';
-                endif;
-                $out .= '<h5>' . get_the_title() . '</h5>';
-                $out .= '</a>';
+				$out .= sp_related_album('post-slider');
                 $out .= '</div><!-- .two-fourth -->';
 
 			endwhile; wp_reset_postdata();
@@ -722,6 +700,26 @@ if ( ! function_exists( 'sp_get_cover_album' ) ) {
 		return $out;
 	}
 }
+
+/* ---------------------------------------------------------------------- */
+/*	Get Cover of Album
+/* ---------------------------------------------------------------------- */
+if ( ! function_exists( 'sp_related_album' ) ) {
+	function sp_related_album( $size = 'thumbnail' ) {
+
+		$out = '';
+		$out .= '<a href="' . get_permalink() . '">';
+		if ( has_post_thumbnail() ):
+            $out .= get_the_post_thumbnail( get_the_ID(), $size);
+        elseif ( ot_get_option('placeholder') != 'off' ):
+            $out .=  '<img class="wp-image-placeholder" src="' . SP_ASSETS_THEME . 'images/placeholder/thumb-medium.png" alt="' . the_title() . '" />';
+        endif;
+        $out .= '<h5>' . get_the_title() . '</h5>';
+        $out .= '</a>';
+
+		return $out;
+	}
+}                
 
 /* ---------------------------------------------------------------------- */
 /*	Display sliders
@@ -826,7 +824,7 @@ if ( ! function_exists( 'sp_related_player_meta' ) ) {
 /*	Get logos by type 
 /* ---------------------------------------------------------------------- */
 if ( ! function_exists( 'sp_get_logos_by_type' ) ) {
-	function sp_get_logos_by_type( $term_id = '', $logo_num = 10, $size = 'large' ) {
+	function sp_get_logos_by_type( $term_id = '', $logo_num = 10, $is_slideshow = false, $size = 'large' ) {
 
 		global $post;
 
@@ -845,8 +843,32 @@ if ( ! function_exists( 'sp_get_logos_by_type' ) ) {
         );
         $sponsors = new WP_Query( $args );
 
+
         if( $sponsors->have_posts() ) :
+        	if ( $is_slideshow ) {
+        	$out .='<script type="text/javascript">
+				jQuery(document).ready(function($){
+					$(".logo-slideshow").flexslider({
+						animation: "fade",
+						pauseOnHover: true,
+						controlNav: false
+					});
+				});		
+				</script>';
+        	$out .= '<div class="logo-slideshow flexslider">';
+        	$out .= '<ul class="slides">';
             while ( $sponsors->have_posts() ) : $sponsors->the_post();
+        		$website_url = (get_post_meta( $post->ID, 'sp_website_url', true )) ? get_post_meta( $post->ID, 'sp_website_url', true ) : '#';
+                if ( has_post_thumbnail() ) :
+                    $out .= '<li><a href="' . $website_url . '" target="_blank">';
+                    $out .= get_the_post_thumbnail( $post->ID, $size);    
+                    $out .= '</a></li>';
+                endif;
+            endwhile; wp_reset_postdata();
+            $out .= '</ul>';
+            $out .= '</div>';
+        	} else {
+        	while ( $sponsors->have_posts() ) : $sponsors->the_post();
         		$website_url = (get_post_meta( $post->ID, 'sp_website_url', true )) ? get_post_meta( $post->ID, 'sp_website_url', true ) : '#';
                 if ( has_post_thumbnail() ) :
                     $out .= '<a href="' . $website_url . '" target="_blank">';
@@ -854,6 +876,7 @@ if ( ! function_exists( 'sp_get_logos_by_type' ) ) {
                     $out .= '</a>';
                 endif;
             endwhile; wp_reset_postdata();
+            }
         endif;
 
 		return $out;

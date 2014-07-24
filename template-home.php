@@ -82,14 +82,17 @@ get_header(); ?>
 
     
     <div class="two-fourth">
-    <div class="widget">
+    <div class="widget clearfix sp-widget-video">
         <div class="widget-title"><h4><?php echo $home_meta['sp_video_title'][0]; ?></h4></div>
-        <?php echo sp_add_video ($home_meta['sp_video_url_home'][0], 300, 169); ?>
+        <?php 
+        echo sp_add_video ($home_meta['sp_video_url_home'][0], 300, 169); 
+        echo '<a class="learn-more" href="' . $home_meta['sp_tc_yotube'][0] . '" target="_blank">' . __( 'Watch other videos', SP_TEXT_DOMAIN ) . '</a>';
+        ?>
     </div><!-- video -->
     <div class="widget sp-widget-logos">
         <div class="widget-title"><h4><?php echo $home_meta['sp_partner_title'][0]; ?></h4></div>
         <section id="partners">
-        <?php echo sp_get_logos_by_type( $home_meta['sp_partner_home'][0], $home_meta['sp_partner_logo_num'][0] ); ?>    
+        <?php echo sp_get_logos_by_type( $home_meta['sp_partner_home'][0], $home_meta['sp_partner_logo_num'][0], $home_meta['sp_logo_slideshow'][0] ); ?>    
         </section>
     </div><!-- partner -->
     </div> 
@@ -97,7 +100,7 @@ get_header(); ?>
     <div class="two-fourth last">
     <div class="widget sp-widget-upcoming-events clearfix">
         <div class="widget-title"><h4><?php echo $home_meta['sp_event_title'][0]; ?></h4></div>
-        <?php echo sp_upcoming_event( 2 ); ?>
+        <?php echo sp_upcoming_event( $home_meta['sp_event_num'][0] ); ?>
     </div><!-- upcoming-event -->   
     </div> <!-- .two-fourth .last -->
 

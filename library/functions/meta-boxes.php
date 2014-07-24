@@ -376,6 +376,13 @@ $page_template_home = array(
 			'std'		=> '',
 			'desc'		=> 'http://youtu.be/WuJlpqVjdY4',
 		),
+		array(
+			'label'		=> ' Tennis Cambodia Channel',
+			'id'		=> $prefix . 'tc_yotube',
+			'type'		=> 'text',
+			'std'		=> '',
+			'desc'		=> 'Enter url channel of Tennis Cambodia',
+		),
 
 		array(
 			'label'		=> 'Event',
@@ -421,8 +428,28 @@ $page_template_home = array(
 			'std'		=> 1,
 			'desc'		=> 'Enter number only.',
 		),
-
 		array(
+			'label'		=> 'Slideshow',
+			'id'		=> $prefix . 'logo_slideshow',
+			'type'		=> 'radio',
+			'std'		=> 0,
+			'desc'		=> 'It would be checked on (Yes), if Number of logo above are more than 1',
+			'operator'    => 'and',
+			'choices' => array(
+		          array(
+		            'value' => 'false',
+		            'label' => 'No',
+		            'src' => ''
+		          ),
+		          array(
+		            'value' => 'true',
+		            'label' => 'Yes',
+		            'src' => ''
+		          )
+		    )
+		),
+
+		/*array(
 			'label'		=> 'Awards',
 			'id'		=> $prefix . 'award_options',
 			'type'		=> 'tab'
@@ -446,7 +473,7 @@ $page_template_home = array(
 			'type'		=> 'text',
 			'std'		=> 1,
 			'desc'		=> 'Enter number only.',
-		),
+		),*/
 
 		array(
 			'label'		=> 'Photogallery',

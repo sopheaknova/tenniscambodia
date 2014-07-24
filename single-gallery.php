@@ -28,7 +28,7 @@ get_header(); ?>
 
 				</article><!-- #post -->
 
-				<?php if ( ot_get_option( 'related-posts' ) != '1' ) { get_template_part('library/contents/related-posts'); } ?>
+				<?php if ( ot_get_option( 'related-posts' ) != '1' ) { get_template_part('library/contents/related-gallery'); } ?>
 
 		<?php		
 				// If comments are open or we have at least one comment, load up the comment template.
