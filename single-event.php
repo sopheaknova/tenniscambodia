@@ -9,13 +9,16 @@ get_header(); ?>
 		<?php
 			// Start the Loop.
 			while ( have_posts() ) : the_post(); 
+				$event_passed_class = ( get_post_meta( get_the_ID(), 'sp_event_end_date', true ) <= date('Y-m-d h:i') ) ? '' : ' passed-event';
 		?>
 
-				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<article id="post-<?php the_ID(); ?>" class="<?php echo $event_passed_class; ?>">
 			
 					<header class="entry-header">
 						<h1 class="entry-title">
 							<?php the_title(); ?>
+
+							<span><?php echo __( 'Passed Event', SP_TEXT_DOMAIN ); ?></span>
 						</h1>
 					</header>
 					<?php echo sp_get_single_event_meta(); ?>

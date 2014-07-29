@@ -922,18 +922,18 @@ if ( ! function_exists( 'sp_upcoming_event' ) ) {
 		    'posts_per_page'        =>   $postnum,
 		    'post_status'           =>   'publish',
 		    'ignore_sticky_posts'   =>   true,
-		    // 'meta_key'              =>   'sp_event_start_date',
-		    // 'orderby'               =>   'meta_value_num',
-		    // 'order'                 =>   'ASC',
+		    /*'meta_key'              =>   'sp_event_start_date',
+		    'orderby'               =>   'meta_value_num',
+		    'order'                 =>   'ASC',
 		    'meta_query'			=> 	 array(
 											    'relation'  =>   'AND',
 											    array(
 											        'key'       =>   'sp_event_end_date',
 											        'value'     =>   date('Y-m-d h:i', time()+(3600*7)),
 											        'compare'   =>   '>=',
-											        'type'		=> 'DATETIME'
+											        'type'		=> 'DATE'
 											    )
-											)	
+											)*/	
 		);
 
 		$custom_query = new WP_Query( $args );
@@ -953,15 +953,20 @@ if ( ! function_exists( 'sp_event_highlight' ) ) {
 
 		$event_start_date = explode( ' ', get_post_meta( get_the_ID(), 'sp_event_start_date', true ) );
 		$event_end_date = explode( ' ', get_post_meta( get_the_ID(), 'sp_event_end_date', true ) );
+		$event_passed_class = ( get_post_meta( get_the_ID(), 'sp_event_end_date', true ) >= date('Y-m-d h:i') ) ? '' : ' passed-event';
 
 		$out ='';
-		$out .= '<article>';
+		$out .= '<article class="upcoming-event' . $event_passed_class .'">';
         $out .= '<div class="event-meta">';
         $out .= '<span class="event-day">' . date('d', strtotime($event_start_date[0])) . '</span>';
         $out .= '<span class="event-month">' . date('M', strtotime($event_start_date[0])) . '</span>';
         $out .= '</div>';
         $out .= '<a href="' . get_permalink() . '" class="event-title">';
-        $out .= '<h5>' . get_the_title() . '</h5>';
+        $out .= '<h5>';
+        $out .= get_the_title();
+        if ( get_post_meta( get_the_ID(), 'sp_event_end_date', true ) <= date('Y-m-d h:i') )
+        	$out .= '<span>' . __( 'Passed Event', SP_TEXT_DOMAIN ) . '</span>';
+        $out .= '</h5>';
         $out .= '<span class="event-location">At ' . get_post_meta( get_the_ID(), 'sp_event_location', true ) . '</span>';
         $out .= '<span class="event-time">' . date('h:i A', strtotime($event_start_date[1])) . ' to ' . date('h:i A', strtotime($event_end_date[1])) . '</span>';
         $out .= '</a>';

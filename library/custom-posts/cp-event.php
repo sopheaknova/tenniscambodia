@@ -79,7 +79,7 @@
 				'show_in_nav_menus'	    => false,
 				'publicly_queryable'	=> true,
 				'exclude_from_search'   => false,
-				'has_archive'			=> false,
+				'has_archive'			=> true,
 				'can_export'			=> true
 			);
 			register_post_type( 'event' , $args );
