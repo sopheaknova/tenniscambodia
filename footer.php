@@ -1,4 +1,19 @@
  
+    <footer id="footer" class="clearfix">
+        <nav id="footer-nav" class="clearfix">
+            <?php echo sp_footer_navigation(); ?>
+        </nav>
+        
+        <div class="copyright">
+            <?php if ( ot_get_option( 'copyright' ) ): ?>
+                <p><?php echo ot_get_option( 'copyright' ); ?></p>
+            <?php else: ?>
+                <p><?php bloginfo(); ?> &copy; <?php echo date( 'Y' ); ?>. <?php _e( 'All Rights Reserved.', SP_TEXT_DOMAIN ); ?></p>
+            <?php endif; ?>
+        </div><!--/#copyright-->
+        
+    </footer>
+
     <aside class="footer-widgets">
         <div class="container clearfix">
             <?php if ( is_active_sidebar('footer-sidebar-1') ) :   
@@ -35,25 +50,11 @@
         <section class="sponsors">   
         <?php dynamic_sidebar('footer-sponsor'); ?>
         </section>
-    <?php endif; ?>        
+    <?php endif; ?>
 
-    <footer id="footer" class="clearfix">
-        <nav id="footer-nav" class="clearfix">
-            <?php echo sp_footer_navigation(); ?>
-        </nav>
-        
-        <div class="copyright">
-            <?php if ( ot_get_option( 'copyright' ) ): ?>
-                <p><?php echo ot_get_option( 'copyright' ); ?></p>
-            <?php else: ?>
-                <p><?php bloginfo(); ?> &copy; <?php echo date( 'Y' ); ?>. <?php _e( 'All Rights Reserved.', SP_TEXT_DOMAIN ); ?></p>
-            <?php endif; ?>
-            <?php if ( ot_get_option( 'credit' ) != 'off' ): ?>
-            <p class="credit"><?php echo ot_get_option( 'credit-text' ); ?></p><!--/#credit-->
-            <?php endif; ?>
-        </div><!--/#copyright-->
-        
-    </footer>
+    <?php if ( ot_get_option( 'credit' ) != 'off' ): ?>
+    <p class="credit"><?php echo ot_get_option( 'credit-text' ); ?></p><!--/#credit-->
+    <?php endif; ?> 
 
     </div> <!-- #content-container -->
 </div> <!-- #wrapper -->
