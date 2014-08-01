@@ -923,7 +923,7 @@ if ( ! function_exists( 'sp_upcoming_event' ) ) {
 		    'post_status'           =>   'publish',
 		    'ignore_sticky_posts'   =>   true,
 		    /*'meta_key'              =>   'sp_event_start_date',
-		    'orderby'               =>   'meta_value_num',
+		    'orderby'               =>   'meta_value_num',*/
 		    'order'                 =>   'ASC',
 		    'meta_query'			=> 	 array(
 											    'relation'  =>   'AND',
@@ -933,7 +933,7 @@ if ( ! function_exists( 'sp_upcoming_event' ) ) {
 											        'compare'   =>   '>=',
 											        'type'		=> 'DATE'
 											    )
-											)*/	
+											)	
 		);
 
 		$custom_query = new WP_Query( $args );
