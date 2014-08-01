@@ -17,7 +17,10 @@ get_header(); ?>
 						<h1 class="entry-title">
 							<?php the_title(); ?>
 						</h1>
-						<div class="entry-meta"><?php the_time('j M, Y'); ?></div>
+						<div class="entry-meta">
+							<span class="album-attr"><?php echo date("F j, Y", strtotime(get_post_meta( get_the_ID(), 'sp_album_date', true))); ?></span>
+        					<span class="album-attr">, <?php echo get_post_meta( get_the_ID(), 'sp_album_location', true); ?></span>
+						</div>
 					</header>
 
 					<div class="entry-content">
