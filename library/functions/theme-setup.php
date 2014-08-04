@@ -78,6 +78,11 @@ if( !function_exists('sp_frontend_scripts_styles') )
 		wp_enqueue_script('hammer', SP_ASSETS_THEME . 'js/hammer.js', array('jquery'), SP_SCRIPTS_VERSION, true);
 		wp_enqueue_script('custom', SP_ASSETS_THEME . 'js/custom.js', array('jquery'), SP_SCRIPTS_VERSION, true);
 
+		if ( is_page_template('template-contact.php')) {
+			wp_enqueue_script('jquery-form', SP_ASSETS_THEME . 'js/jquery.form.js', array('jquery'), SP_SCRIPTS_VERSION, true);
+			wp_enqueue_script('jquery-validate', SP_ASSETS_THEME . 'js/jquery.validate.min.js', array('jquery'), SP_SCRIPTS_VERSION, true);
+		}
+
 		if ( is_singular() ) { wp_enqueue_script('sharrre', SP_ASSETS_THEME . 'js/jquery.sharrre.min.js', array('jquery'), SP_SCRIPTS_VERSION, true); }
 		if ( is_singular() && comments_open() ) { wp_enqueue_script( 'comment-reply' ); }
 
@@ -85,6 +90,7 @@ if( !function_exists('sp_frontend_scripts_styles') )
 			'custom', 
 			'theme_objects',
 			array(
+				'ajaxURL' => admin_url( 'admin-ajax.php' ),
 				'base' => get_template_directory_uri(),
 				'commentProcess' => __('Processing your comment...', SP_TEXT_DOMAIN),
 				'commentError' => __('You might have left one of the fields blank, or be posting too quickly.', SP_TEXT_DOMAIN),

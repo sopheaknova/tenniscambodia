@@ -1000,6 +1000,40 @@ if ( ! function_exists( 'sp_get_single_event_meta' ) ) {
 }	
 
 /* ---------------------------------------------------------------------- */
+/*	Contact form: Send email
+/* ---------------------------------------------------------------------- */
+if ( !function_exists('sp_send_contact_form') ) {
+
+	function sp_send_contact_form(){
+		
+		parse_str ($_POST['inquiry'], $inquiry);
+		$email_from = $inquiry['email'];
+		$email = 'sopheak.peas@novacambodia.com';
+		$subject = $inquiry['name'];
+		$body = $inquiry['message'];
+		$headers = "From: " . strip_tags($email_from) . "\r\n";
+		$headers .= "Reply-To: ". strip_tags($email_from) . "\r\n";
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+		
+		if (mail($email, $subject, $body, $headers)){
+			$out = '<h3>Email was sent successfully.</h3>';
+			$out .= '<p>If you don\'t receive our answer after 1 working day, please check your spam email. It may go to your spam mailbox.</p>';
+			$out .= '<p>If you have any questions, please kindly contact us at: <a href="mailto:' . $email . '">' . $email . '</a></p>';
+			echo $out;
+		} else {
+			echo '<h5>Sorry, your inquiry cannot be send right now.</h5><p>' . error_message . '</p>';
+		};
+
+		die();
+	}
+
+	add_action('wp_ajax_nopriv_sp_send_contact_form', 'sp_send_contact_form'); //executes for users that are not logged in.
+	add_action('wp_ajax_sp_send_contact_form', 'sp_send_contact_form');
+
+}
+
+/* ---------------------------------------------------------------------- */
 /*	Social icons - Widget
 /* ---------------------------------------------------------------------- */
 if ( ! function_exists( 'sp_show_social_icons' ) ) {

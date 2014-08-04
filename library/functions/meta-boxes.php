@@ -341,6 +341,28 @@ $post_format_quote = array(
 );
 
 /* ---------------------------------------------------------------------- */
+/*	Metabox for Contact template
+/* ---------------------------------------------------------------------- */
+$page_template_contact = array(
+	'id'          => 'contact-settings',
+	'title'       => 'contact settings',
+	'desc'        => '',
+	'pages'       => array( 'page' ),
+	'context'     => 'normal',
+	'priority'    => 'high',
+	'fields'      => array(
+		array(
+			'label'		=> 'Latitude and Longitude of a Point',
+			'id'		=> $prefix . 'contact_map',
+			'type'		=> 'text',
+			'desc'		=> 'You can get latitude and longitude coordinates of a point from <a href="http://itouchmap.com/latlong.html" target="_blank">Itouchmap</a>',
+			'std'		=> '11.575856,104.924111'
+
+		)
+	)
+);
+
+/* ---------------------------------------------------------------------- */
 /*	Metabox for Home template
 /* ---------------------------------------------------------------------- */
 $page_template_home = array(
@@ -563,6 +585,9 @@ function rw_maybe_include() {
 	$template_file = rw_maybe_include();
 	if ( $template_file == 'template-home.php' ) {
 	    ot_register_meta_box( $page_template_home );
+	}
+	if ( $template_file == 'template-contact.php' ) {
+	    ot_register_meta_box( $page_template_contact );
 	}
 
 	ot_register_meta_box( $page_options );
