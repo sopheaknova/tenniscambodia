@@ -482,6 +482,13 @@ $page_template_home = array(
 		          )
 		    )
 		),
+		array(
+			'label'		=> 'Parnter page URL',
+			'id'		=> $prefix . 'partner_page',
+			'type'		=> 'text',
+			'std'		=> '',
+			'desc'		=> 'Enter url partner page',
+		),
 
 		/*array(
 			'label'		=> 'Awards',
@@ -533,6 +540,13 @@ $page_template_home = array(
 			'type'		=> 'text',
 			'std'		=> 4,
 			'desc'		=> 'Enter column number of album.',
+		),
+		array(
+			'label'		=> 'Photo gallery page URL',
+			'id'		=> $prefix . 'photogallery_page',
+			'type'		=> 'text',
+			'std'		=> '',
+			'desc'		=> 'Enter url photo gallery page',
 		),
 
 	)

@@ -89,10 +89,13 @@ get_header(); ?>
         echo '<a class="learn-more" href="' . $home_meta['sp_tc_yotube'][0] . '" target="_blank">' . __( 'Watch other videos', SP_TEXT_DOMAIN ) . '</a>';
         ?>
     </div><!-- video -->
-    <div class="widget sp-widget-logos">
+    <div class="widget clearfix sp-widget-logos">
         <div class="widget-title"><h4><?php echo $home_meta['sp_partner_title'][0]; ?></h4></div>
         <section id="partners">
-        <?php echo sp_get_logos_by_type( $home_meta['sp_partner_home'][0], $home_meta['sp_partner_logo_num'][0], $home_meta['sp_logo_slideshow'][0] ); ?>    
+        <?php 
+            echo sp_get_logos_by_type( $home_meta['sp_partner_home'][0], $home_meta['sp_partner_logo_num'][0], $home_meta['sp_logo_slideshow'][0] ); 
+            echo '<a class="learn-more" href="' . $home_meta['sp_partner_page'][0] . '">' . __( 'All partners', SP_TEXT_DOMAIN ) . '</a>';
+        ?>    
         </section>
     </div><!-- partner -->
     </div> 
@@ -110,9 +113,12 @@ get_header(); ?>
 	<?php get_sidebar();?>
 
     <div class="clear"></div>
-    <div class="widget sp-widget-photogallery">
+    <div class="widget clearfix sp-widget-photogallery">
         <div class="widget-title"><h4><?php echo $home_meta['sp_photo_title'][0]; ?></h4></div>
-        <?php echo sp_get_cover_album( $home_meta['sp_album_num'][0], $home_meta['sp_album_col'][0], 'post-slider' ); ?>
+        <?php 
+            echo sp_get_cover_album( $home_meta['sp_album_num'][0], $home_meta['sp_album_col'][0], 'post-slider' ); 
+            echo '<a class="learn-more" href="' . $home_meta['sp_photogallery_page'][0] . '">' . __( 'All albums', SP_TEXT_DOMAIN ) . '</a>';
+        ?>
     </div>
 
 <?php do_action( 'sp_end_content_wrap_html' ); ?>
