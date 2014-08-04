@@ -6,6 +6,7 @@ load_template( SP_BASE_DIR . 'library/custom-posts/cp-gallery.php' );
 load_template( SP_BASE_DIR . 'library/custom-posts/cp-logo.php' );
 load_template( SP_BASE_DIR . 'library/custom-posts/cp-player.php' );
 load_template( SP_BASE_DIR . 'library/custom-posts/cp-event.php' );
+load_template( SP_BASE_DIR . 'library/custom-posts/cp-newsletter.php' );
 
 //Taxonomies
 load_template( SP_BASE_DIR . 'library/custom-posts/taxonomy-logo.php' );

@@ -997,6 +997,40 @@ if ( ! function_exists( 'sp_get_single_event_meta' ) ) {
 		return $out;
 
 	}
+}
+
+/* ---------------------------------------------------------------------- */
+/*	Newsletter
+/* ---------------------------------------------------------------------- */
+
+if ( ! function_exists( 'sp_get_newsletter' ) ) {
+	function sp_get_newsletter( $numberposts = '10' ){
+		global $post;
+
+		$out = '';
+
+		$args = array(
+			'post_type' => 'newsletter',
+			'post_status' => 'publish',
+			'posts_per_page' => $numberposts
+			);
+		$custom_query = new WP_Query( $args );
+		if( $custom_query->have_posts() ) :
+			$out .= '<div class="sp-newsletter">';
+			while ( $custom_query->have_posts() ) : $custom_query->the_post();
+				$file_url = get_post_meta( $post->ID, 'sp_newsletter_url', true );
+				$out .= '<article class="post-' . get_the_ID() . '">';
+				$out .= '<img class="attachment-medium wp-post-image" src="' . sp_post_thumbnail('medium') . '" width="60" height="85">';
+				$out .= '<h5>' . get_the_title() . '</h5>';
+				$out .= '<span class="time">' . get_the_date('F j, Y') . '</span>';
+				$out .= '<a class="download" href="' . $file_url . '">' . __('Download', SP_TEXT_DOMAIN) . '</a>';
+				$out .= '</article>';
+			endwhile;
+			wp_reset_postdata();
+			$out .= '</div>';
+		endif;
+		return $out;	
+	}
 }	
 
 /* ---------------------------------------------------------------------- */

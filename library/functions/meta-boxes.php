@@ -207,6 +207,26 @@ $post_type_logo = array(
 );
 
 /* ---------------------------------------------------------------------- */
+/*	Newsletter post type
+/* ---------------------------------------------------------------------- */
+$post_type_newsletter = array(
+	'id'          => 'newsletter-settings',
+	'title'       => 'Newsletter meta',
+	'desc'        => 'These settings enable you to embed upload newsletter file',
+	'pages'       => array( 'newsletter' ),
+	'context'     => 'normal',
+	'priority'    => 'high',
+	'fields'      => array(
+		array(
+			'label'		=> 'Newsletter File URL',
+			'id'		=> $prefix . 'newsletter_url',
+			'type'		=> 'upload',
+			'desc'		=> 'Upload newsletter as .pdf file'
+		)
+	)
+);
+
+/* ---------------------------------------------------------------------- */
 /*	Post Format: video
 /* ---------------------------------------------------------------------- */
 $post_format_video = array(
@@ -595,6 +615,7 @@ function rw_maybe_include() {
 	ot_register_meta_box( $post_type_slider );
 	ot_register_meta_box( $post_type_logo );
 	ot_register_meta_box( $post_type_event );
+	ot_register_meta_box( $post_type_newsletter );
 
 	$template_file = rw_maybe_include();
 	if ( $template_file == 'template-home.php' ) {

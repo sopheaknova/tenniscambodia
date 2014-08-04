@@ -72,6 +72,7 @@ load_template ( SP_BASE_DIR . 'library/widgets/widget-fb-likebox.php' );
 load_template ( SP_BASE_DIR . 'library/widgets/widget-video.php' );
 load_template ( SP_BASE_DIR . 'library/widgets/widget-photogallery.php' );
 load_template ( SP_BASE_DIR . 'library/widgets/widget-logos.php' );
+load_template ( SP_BASE_DIR . 'library/widgets/widget-newsletter.php' );
 
 /* ---------------------------------------------------------------------- */
 /*	Register custom sidebars
