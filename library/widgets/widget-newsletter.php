@@ -39,6 +39,7 @@ class sp_widget_newletter extends WP_Widget {
 		/* Our variables from the widget settings. */
 		$title = apply_filters('widget_title', $instance['title']);
 		$post_num = $instance['post_num'];
+		$archive_link = $instance['archive_link'];
 		
 		/* Before widget (defined by themes). */
 		$out = $before_widget;
@@ -47,7 +48,7 @@ class sp_widget_newletter extends WP_Widget {
 		if ( $title )
 			$out .= $before_title . $title . $after_title;
 
-		$out .= sp_get_newsletter( $post_num );
+		$out .= sp_get_newsletter( $post_num, $archive_link );
 	
 		/* After widget (defined by themes). */		
 		$out .= $after_widget;
@@ -64,6 +65,7 @@ class sp_widget_newletter extends WP_Widget {
 		/* Strip tags for title and name to remove HTML (important for text inputs). */
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['post_num'] = strip_tags( $new_instance['post_num'] );
+		$instance['archive_link'] = strip_tags( $new_instance['archive_link'] );
 
 		return $instance;
 	}
@@ -78,7 +80,8 @@ class sp_widget_newletter extends WP_Widget {
 		/* Set up some default widget settings. */
 		$defaults = array( 
 			'title' => 'Newsletter', 
-			'post_num' => '5');
+			'post_num' => '5',
+			'archive_link' => '');
 		$instance = wp_parse_args( (array) $instance, $defaults); 
 
 		?>
@@ -87,10 +90,15 @@ class sp_widget_newletter extends WP_Widget {
 		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'sptheme_widget') ?></label>
 		<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>"  class="widefat">
 		</p>
-		
+
 		<p>
 			<label for="<?php echo $this->get_field_id( 'post_num' ); ?>">Number of post: </label>
 			<input id="<?php echo $this->get_field_id( 'post_num' ); ?>" name="<?php echo $this->get_field_name( 'post_num' ); ?>" value="<?php echo $instance['post_num']; ?>" type="text" size="3" />
+		</p>
+
+		<p>
+		<label for="<?php echo $this->get_field_id( 'archive_link' ); ?>"><?php _e('Archive link:', 'sptheme_widget') ?></label>
+		<input type="text" id="<?php echo $this->get_field_id( 'archive_link' ); ?>" name="<?php echo $this->get_field_name( 'archive_link' ); ?>" value="<?php echo $instance['archive_link']; ?>"  class="widefat">
 		</p>
         
 	   <?php 

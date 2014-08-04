@@ -121,9 +121,6 @@ get_header(); ?>
         ?>
     </div>
 
-    <div class="clear"></div>
-    <?php echo sp_get_newsletter(); ?>
-
 <?php do_action( 'sp_end_content_wrap_html' ); ?>
 	
 <?php get_footer(); ?>

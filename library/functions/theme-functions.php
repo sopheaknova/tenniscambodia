@@ -1004,7 +1004,7 @@ if ( ! function_exists( 'sp_get_single_event_meta' ) ) {
 /* ---------------------------------------------------------------------- */
 
 if ( ! function_exists( 'sp_get_newsletter' ) ) {
-	function sp_get_newsletter( $numberposts = '10' ){
+	function sp_get_newsletter( $numberposts = '10', $archive_link = '' ){
 		global $post;
 
 		$out = '';
@@ -1016,7 +1016,7 @@ if ( ! function_exists( 'sp_get_newsletter' ) ) {
 			);
 		$custom_query = new WP_Query( $args );
 		if( $custom_query->have_posts() ) :
-			$out .= '<div class="sp-newsletter">';
+			$out .= '<div class="sp-newsletter clearfix">';
 			while ( $custom_query->have_posts() ) : $custom_query->the_post();
 				$file_url = get_post_meta( $post->ID, 'sp_newsletter_url', true );
 				$out .= '<article class="post-' . get_the_ID() . '">';
@@ -1027,8 +1027,10 @@ if ( ! function_exists( 'sp_get_newsletter' ) ) {
 				$out .= '</article>';
 			endwhile;
 			wp_reset_postdata();
+			$out .= '<a class="learn-more" href="' . $archive_link . '">' . __( 'All newsletters', SP_TEXT_DOMAIN ) . '</a>';
 			$out .= '</div>';
 		endif;
+
 		return $out;	
 	}
 }	
