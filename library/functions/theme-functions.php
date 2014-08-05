@@ -740,7 +740,7 @@ if ( ! function_exists( 'sp_related_album' ) ) {
             $out .=  '<img class="wp-image-placeholder" src="' . SP_ASSETS_THEME . 'images/placeholder/thumb-medium.png" alt="' . the_title() . '" />';
         endif;
         $out .= '<h5>' . get_the_title() . '</h5>';
-        $out .= '<span class="album-attr">' . date("F j, Y", strtotime(get_post_meta( get_the_ID(), 'sp_album_date', true))) . '</span>';
+        $out .= '<span class="album-attr">' . get_the_date('F j, Y') . '</span>';
         $out .= '<span class="album-attr">' . get_post_meta( get_the_ID(), 'sp_album_location', true) . '</span>';
         $out .= '</a>';
 
@@ -1045,7 +1045,7 @@ if ( !function_exists('sp_send_contact_form') ) {
 		
 		parse_str ($_POST['inquiry'], $inquiry);
 		$email_from = $inquiry['email'];
-		$email = 'sopheak.peas@novacambodia.com';
+		$email = ot_get_option('email_inquiry');
 		$subject = $inquiry['name'];
 		$body = $inquiry['message'];
 		$headers = "From: " . strip_tags($email_from) . "\r\n";

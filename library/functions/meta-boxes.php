@@ -134,12 +134,6 @@ $post_type_gallery = array(
 	'priority'    => 'high',
 	'fields'      => array(
 		array(
-			'label'		=> 'Date',
-			'id'		=> $prefix . 'album_date',
-			'type'		=> 'date-picker',
-			'desc'		=> 'Date for album that was created or take photo'
-		),
-		array(
 			'label'		=> 'Location',
 			'id'		=> $prefix . 'album_location',
 			'type'		=> 'text',

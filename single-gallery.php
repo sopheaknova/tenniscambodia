@@ -18,8 +18,8 @@ get_header(); ?>
 							<?php the_title(); ?>
 						</h1>
 						<div class="entry-meta">
-							<span class="album-attr"><?php echo date("F j, Y", strtotime(get_post_meta( get_the_ID(), 'sp_album_date', true))); ?></span>
-        					<span class="album-attr">, <?php echo get_post_meta( get_the_ID(), 'sp_album_location', true); ?></span>
+							<span class="album-attr"><?php echo get_the_date('F j, Y'); ?></span>
+        					<span class="album-attr"><?php echo __(', At ', SP_TEXT_DOMAIN);?><?php echo get_post_meta( get_the_ID(), 'sp_album_location', true); ?></span>
 						</div>
 					</header>
 

@@ -90,6 +90,14 @@ function custom_theme_options() {
 			'type'		=> 'on-off',
 			'section'	=> 'general'
 		),
+		array(
+			'id'		=> 'email_inquiry',
+			'label'		=> 'Contact Email address',
+			'desc'		=> 'Email address will get comment or any inquiry in contact form.',
+			'type'		=> 'text',
+			'std'		=> 'info@tenniscambodia.com',
+			'section'	=> 'general'
+		),
 		
 		// Blog: Excerpt Length
 		array(
