@@ -48,7 +48,7 @@ class sp_widget_newletter extends WP_Widget {
 		if ( $title )
 			$out .= $before_title . $title . $after_title;
 
-		$out .= sp_get_newsletter( $post_num, $archive_link );
+		$out .= sp_get_newsletter( $post_num, 1, $archive_link );
 	
 		/* After widget (defined by themes). */		
 		$out .= $after_widget;

@@ -15,6 +15,7 @@ function sp_shortcodes_register_mce_button( $buttons ) {
 	array_push( $buttons, 'tab' );
 	array_push( $buttons, 'gallery' );
 	array_push( $buttons, 'player' );
+	array_push( $buttons, 'newsletter' );
 
     return $buttons;
 }
@@ -30,6 +31,7 @@ function sp_shortcodes_add_tinymce_plugin($plugin_array) {
 	$plugin_array['tab']			= ED_JS_URL . 'ed-tab.js';
 	$plugin_array['gallery']		= ED_JS_URL . 'ed-gallery.js';
 	$plugin_array['player']			= ED_JS_URL . 'ed-player.js';
+	$plugin_array['newsletter']		= ED_JS_URL . 'ed-newsletter.js';
 	
     return $plugin_array;
  }

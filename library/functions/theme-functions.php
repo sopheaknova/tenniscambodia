@@ -1004,7 +1004,7 @@ if ( ! function_exists( 'sp_get_single_event_meta' ) ) {
 /* ---------------------------------------------------------------------- */
 
 if ( ! function_exists( 'sp_get_newsletter' ) ) {
-	function sp_get_newsletter( $numberposts = '10', $archive_link = '' ){
+	function sp_get_newsletter( $numberposts = '10', $cols = 2,  $archive_link = '' ){
 		global $post;
 
 		$out = '';
@@ -1019,15 +1019,16 @@ if ( ! function_exists( 'sp_get_newsletter' ) ) {
 			$out .= '<div class="sp-newsletter clearfix">';
 			while ( $custom_query->have_posts() ) : $custom_query->the_post();
 				$file_url = get_post_meta( $post->ID, 'sp_newsletter_url', true );
-				$out .= '<article class="post-' . get_the_ID() . '">';
-				$out .= '<img class="attachment-medium wp-post-image" src="' . sp_post_thumbnail('medium') . '" width="60" height="85">';
+				$out .= '<article class="' . sp_colums_switcher($cols) .' post-' . get_the_ID() . '">';
+				$out .= '<img class="attachment-medium wp-post-image" src="' . sp_post_thumbnail('medium') . '" width="70" height="90">';
 				$out .= '<h5>' . get_the_title() . '</h5>';
 				$out .= '<span class="time">' . get_the_date('F j, Y') . '</span>';
-				$out .= '<a class="download" href="' . $file_url . '">' . __('Download', SP_TEXT_DOMAIN) . '</a>';
+				$out .= '<a class="download" href="' . $file_url . '" target="_blank">' . __('Download', SP_TEXT_DOMAIN) . '</a>';
 				$out .= '</article>';
 			endwhile;
 			wp_reset_postdata();
-			$out .= '<a class="learn-more" href="' . $archive_link . '">' . __( 'All newsletters', SP_TEXT_DOMAIN ) . '</a>';
+			if ( !empty($archive_link) )
+				$out .= '<a class="learn-more" href="' . $archive_link . '">' . __( 'All newsletters', SP_TEXT_DOMAIN ) . '</a>';
 			$out .= '</div>';
 		endif;
 

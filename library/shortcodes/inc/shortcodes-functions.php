@@ -37,6 +37,7 @@ function sp_add_shortcodes() {
 	add_shortcode( 'slider', 'sp_slider_sc' );
 	add_shortcode( 'sc_gallery', 'sp_gallery_sc' );
 	add_shortcode( 'player', 'sp_player_sc' );
+	add_shortcode( 'newsletter', 'sp_newsletter_sc' );
 	
 }
 add_action( 'init', 'sp_add_shortcodes' );
@@ -286,5 +287,19 @@ function sp_player_sc( $atts, $content = null ){
 	return sp_get_player_member( $category_id, $numberposts );
 
 }
+
+/*--------------------------------------------------------------------------------------*/
+/* Newsletter shortcode
+/*--------------------------------------------------------------------------------------*/
+function sp_newsletter_sc( $atts, $content = null ){
+
+	extract( shortcode_atts( array(
+		'post_num' => null,
+		'cols' => null
+	), $atts ) );
+
+	return sp_get_newsletter( $post_num, $cols );
+}
+
 
 
