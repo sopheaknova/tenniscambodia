@@ -75,7 +75,6 @@ if( !function_exists('sp_frontend_scripts_styles') )
 		wp_enqueue_script('flexslider', SP_ASSETS_THEME . 'js/jquery.flexslider.js', array('jquery'), SP_SCRIPTS_VERSION, true);
 		wp_enqueue_script('fitvideos', SP_ASSETS_THEME . 'js/jquery.fitvids.js', array('jquery'), SP_SCRIPTS_VERSION, true);
 		wp_enqueue_script('magnific-popup', SP_ASSETS_THEME . 'js/jquery.magnific-popup.min.js', array('jquery'), SP_SCRIPTS_VERSION, false);
-		wp_enqueue_script('hammer', SP_ASSETS_THEME . 'js/hammer.js', array('jquery'), SP_SCRIPTS_VERSION, true);
 		wp_enqueue_script('custom', SP_ASSETS_THEME . 'js/custom.js', array('jquery'), SP_SCRIPTS_VERSION, true);
 
 		if ( is_page_template('template-contact.php')) {

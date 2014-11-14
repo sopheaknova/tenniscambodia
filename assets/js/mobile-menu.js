@@ -8,7 +8,6 @@ var eventHover = 'mouseover mouseout';
 (function($){
   if ('ontouchstart' in document.documentElement) {
     $('html').addClass('touch');
-    $('body').addClass('touch-gesture');
     touchSupport = true;
     eventClick = 'touchon touchend';
     eventHover = 'touchstart touchend';
@@ -69,35 +68,6 @@ jQuery(document).ready(function($) {
     setTimeout(function() {
       window.location = path;
     }, 500);
-  });
-
-  // Swipe menu support 
-  $('.touch-gesture #content').hammer().on('swiperight', function(event) {
-    $('#content-container').addClass('active');
-    $('#sidemenu').addClass('active');
-    if(opened){
-      opened = false;
-      setTimeout(function() {
-        $('#sidemenu-container').removeClass('active');
-      }, 500);
-    } else {
-      $('#sidemenu-container').addClass('active');
-      opened = true;
-    }
-  });
-  
-  $('.touch-gesture #content').hammer().on('swipeleft', function(event) {
-    $('#content-container').removeClass('active');
-    $('#sidemenu').removeClass('active');
-    if(opened){
-      opened = false;
-      setTimeout(function() {
-        $('#sidemenu-container').removeClass('active');
-      }, 500);
-    } else {
-      $('#sidemenu-container').addClass('active');
-      opened = true;
-    }
   });
 
   // Check if the child menu has an active item. If yes, then it will expand the menu by default. 
