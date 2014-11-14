@@ -599,7 +599,7 @@ if ( ! function_exists( 'sp_last_posts_cat' ) ) {
 		if ( is_singular() && !is_front_page() ) :
 			$args = array( 'cat' => $category, 'posts_per_page' => (int) $post_num, 'post__not_in' => array($post->ID) );	
 		else : 
-			$args = array( 'cat' => $category, 'posts_per_page' => (int) $post_num, 'post__not_in' => get_option( 'sticky_posts' ) );
+			$args = array( 'cat' => $category, 'posts_per_page' => (int) $post_num, 'offset' => 5 );
 		endif;
 		
 
