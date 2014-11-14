@@ -9,7 +9,7 @@ get_header(); ?>
 		<?php
 			// Start the Loop.
 			while ( have_posts() ) : the_post(); 
-				$event_passed_class = ( get_post_meta( get_the_ID(), 'sp_event_end_date', true ) <= date('Y-m-d h:i') ) ? '' : ' passed-event';
+				$event_passed_class = ( get_post_meta( get_the_ID(), 'sp_event_end_date', true ) >= date('Y-m-d h:i') ) ? '' : ' passed-event';
 		?>
 
 				<article id="post-<?php the_ID(); ?>" class="<?php echo $event_passed_class; ?>">
